@@ -1,2 +1,28 @@
-<h1>Weather#index</h1>
-<p>Find me in app/views/weather/index.html.erb</p>
+<h1>Weather</h1>
+<h2><%= @retrieved_data.elements["yweather:location"].attributes['city'] %></h2>
+
+<h3>Current weather conditions</h3>
+<p><%= @retrieved_data.elements["item/yweather:condition"].attributes['text'] %></p>
+<p>Temperature: <%= @retrieved_data.elements["item/yweather:condition"].attributes['temp'] %>
+  *<%= @retrieved_data.elements["yweather:units"].attributes['temperature'] %></p>
+<p>Wind: <%= @retrieved_data.elements["yweather:wind"].attributes['speed'] %>
+  <%= @retrieved_data.elements["yweather:units"].attributes['speed'] %>
+  <%= wind_direction(@retrieved_data.elements["yweather:wind"].attributes['direction']) %></p>
+
+<h3>Weather forecast</h3>
+<table>
+  <tr>
+    <th></th>
+    <th>Low</th>
+    <th>High</th>
+    <th></th>
+  </tr>
+<% @retrieved_data.each_element('//yweather:forecast') do |element|  %>
+    <tr>
+      <td><%= element.attributes["day"] %>, <%= element.attributes["date"] %></td>
+      <td><%= element.attributes["low"] %>*C</td>
+      <td><%= element.attributes["high"] %>*C</td>
+      <td><%= element.attributes["text"] %></td>
+    </tr>
+<% end %>
+</table>

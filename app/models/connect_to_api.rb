@@ -24,7 +24,3 @@ class ConnectToApi
     return doc.root.elements["channel"]
   end
 end
-
-
-
-

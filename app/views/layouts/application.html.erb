@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Weather app" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,6 +12,19 @@
   </head>
 
   <body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name"><h1><a href="#">The Weather App</a></h1></li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="left">
+          <% ConnectToApi::LOCATION_CODES.keys.each do |key| %>
+            <li><%= link_to(key, :controller => "weather", :action => "localized_weather", :city => key )%></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>

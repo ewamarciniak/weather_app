@@ -2,41 +2,90 @@
 <div class="row">
   <div class="large-12 columns">
   <h1><%= @retrieved_data.elements["yweather:location"].attributes['city'] %></h1>
+  <p><%= @retrieved_data.elements["yweather:location"].attributes['country'] %></p>
    </div>
   </div>
 <div class="row">
+  <div class="large-12 columns panel">
+      <h3>Current weather conditions</h3>
+  <div class="row">
   <div class="large-6 columns">
-<h3>Current weather conditions</h3>
-<p><%= @retrieved_data.elements["item/yweather:condition"].attributes['text'] %></p>
-<p>Temperature: <%= @retrieved_data.elements["item/yweather:condition"].attributes['temp'] %>
-  °<%= @retrieved_data.elements["yweather:units"].attributes['temperature'] %></p>
-<p>Wind: <%= @retrieved_data.elements["yweather:wind"].attributes['speed'] %>
-  <%= @retrieved_data.elements["yweather:units"].attributes['speed'] %>
-  <%= wind_direction(@retrieved_data.elements["yweather:wind"].attributes['direction']) %></p>
-  <%= image_tag("weather_icons/#{@retrieved_data.elements["item/yweather:condition"].attributes['code']}.png",
-                              alt: "#{@retrieved_data.elements["item/yweather:condition"].attributes['text']}",
-                              name: "icon",
-                              id: "insert_logo", src: "/assets/images/weather_icons/#{@retrieved_data.elements["item/yweather:condition"].attributes['code']}.png",
-                              :size => '128x128')
-                              %>
+    <div class="row">
+      <div class="large-6 columns">
+        <p class="grand"><%= @retrieved_data.elements["item/yweather:condition"].attributes['temp'] %>°<%= @retrieved_data.elements["yweather:units"].attributes['temperature'] %></p>
+         <p class="no_bottom_margin"><%= @retrieved_data.elements["item/yweather:condition"].attributes['text'] %></p>
+         <p>Feels like: <%= @retrieved_data.elements["yweather:wind"].attributes['chill']%>°C</p>
+       </div>
+       <div class="large-6 columns">
+              <%= image_tag("weather_icons/#{@retrieved_data.elements["item/yweather:condition"].attributes['code']}.png",
+                      alt: "#{@retrieved_data.elements["item/yweather:condition"].attributes['text']}",
+                      name: "icon",
+                      id: "insert_logo", 
+                      src: "/assets/images/weather_icons/#{@retrieved_data.elements["item/yweather:condition"].attributes['code']}.png",
+                      :size => '128x128')%>
+       </div>
+    </div>
 </div>
   <div class="large-6 columns">
+    <table>
+      <tr>
+        <th>Wind:</th>
+         <td>
+          <%= @retrieved_data.elements["yweather:wind"].attributes['speed'] %>
+          <%= @retrieved_data.elements["yweather:units"].attributes['speed'] %>
+          <%= wind_direction(@retrieved_data.elements["yweather:wind"].attributes['direction']) %>
+        </td>
+      </tr>
+      <tr>
+         <th>Humidity:</th>
+         <td><%= @retrieved_data.elements["yweather:atmosphere"].attributes['humidity'] %>%</td>
+      </tr>
+      <tr>
+         <th>Visibility:</th>
+         <td><%= @retrieved_data.elements["yweather:atmosphere"].attributes['visibility']%> 
+            <%= @retrieved_data.elements["yweather:units"].attributes['distance'] %></td>
+      </tr>
+      <tr>
+         <th>Pressure:</th>
+         <td><%= @retrieved_data.elements["yweather:atmosphere"].attributes['pressure']%> 
+      <%= @retrieved_data.elements["yweather:units"].attributes['pressure'] %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="large-12 columns panel">
 <h3>Weather forecast</h3>
-<table>
-  <tr>
-    <th></th>
-    <th>Low</th>
-    <th>High</th>
-    <th></th>
-  </tr>
-<% @retrieved_data.each_element('//yweather:forecast') do |element|  %>
-    <tr>
-      <td><%= element.attributes["day"] %>, <%= element.attributes["date"] %></td>
-      <td><%= element.attributes["low"] %>°C</td>
-      <td><%= element.attributes["high"] %>°C</td>
-      <td><%= element.attributes["text"] %></td>
-    </tr>
-<% end %>
-</table>
-</div>
+    <table>
+      <tr>
+        <th></th>
+        <th>Low</th>
+        <th>High</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    <% @retrieved_data.each_element('//yweather:forecast') do |element|  %>
+        <tr>
+          <td><%= element.attributes["day"] %>, <%= element.attributes["date"] %></td>
+          <td><%= element.attributes["low"] %>°C</td>
+          <td><%= element.attributes["high"] %>°C</td>
+          <td><%= element.attributes["text"] %></td>
+          <td><%= image_tag("weather_icons/#{element.attributes['code']}.png",
+                      alt: element.attributes['text'],
+                      name: "icon",
+                      id: "insert_logo", 
+                      src: "/assets/images/weather_icons/#{element.attributes['code']}.png",
+                      :size => '45x45')%></td>
+          <td></td>
+          <td>Average temperature: <%= average_temperature(element.attributes["low"], element.attributes["high"]) %>
+            °<%= @retrieved_data.elements["yweather:units"].attributes['temperature'] %></td>
+        </tr>
+    <% end %>
+    </table>
+
+  </div>
 </div>

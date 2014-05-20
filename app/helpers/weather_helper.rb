@@ -21,4 +21,8 @@ module WeatherHelper
       ""
     end
   end
+
+  def average_temperature(low, high)
+    (low.to_f + high.to_f)/2
+  end
 end

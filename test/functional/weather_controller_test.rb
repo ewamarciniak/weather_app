@@ -6,4 +6,8 @@ class WeatherControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get localized_weather" do
+    get(:localized_weather, {'city' => 'Dublin'})
+    assert_response :success
+  end
 end

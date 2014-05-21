@@ -14,7 +14,7 @@
   <body>
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
-        <li class="name"><h1><a href="#">The Weather App</a></h1></li>
+        <li class="name"><h1><%= link_to( 'The Weather App', {:controller => "weather", :action => "index"}) %> </h1></li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
       <section class="top-bar-section">

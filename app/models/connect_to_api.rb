@@ -11,9 +11,11 @@ class ConnectToApi
       "Dublin" => "560743"
   }
 
-  def pull_weather_info(city)
+  def pull_weather_info(city, units)
+
     # using Yahoo API
-    url = 'http://weather.yahooapis.com/forecastrss?w=' + LOCATION_CODES[city] + '&u=c'
+    unit_parameter = (units =='C' || units =="" ) ? '&u=c' : ''
+    url = 'http://weather.yahooapis.com/forecastrss?w=' + LOCATION_CODES[city] + unit_parameter
 
     # getting the XML data as a string
     xml_data = Net::HTTP.get_response(URI.parse(url)).body

@@ -26,3 +26,14 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 table tr:nth-of-type(even) {
     background-color: transparent !important;
 }
+
+#unit_button {
+    margin-top: 2em;
+    margin-right:0;
+    background-color: #f2f2f2;
+    border: 1px solid #d8d8d8;
+}
+#unit_button a{
+    color: black;
+    font-size: 1.2em;
+}

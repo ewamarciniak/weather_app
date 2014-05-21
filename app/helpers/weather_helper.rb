@@ -46,4 +46,8 @@ module WeatherHelper
   def average_temperature(low, high)
     (low.to_f + high.to_f)/2
   end
+
+  def change_unit(current_unit)
+    current_unit == 'C' ? 'F' : 'C'
+  end
 end

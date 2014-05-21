@@ -1,10 +1,18 @@
 
 <div class="row">
-  <div class="large-12 columns">
-  <h1><%= @retrieved_data.elements["yweather:location"].attributes['city'] %></h1>
-  <p><%= @retrieved_data.elements["yweather:location"].attributes['country'] %></p>
-   </div>
+  <div class="large-11 columns">
+    <h1><%= @retrieved_data.elements["yweather:location"].attributes['city'] %></h1>
+    <p><%= @retrieved_data.elements["yweather:location"].attributes['country'] %></p>
   </div>
+ <div class="large-1 columns">
+    <p class="button tiny round" id="unit_button"><%= link_to("°#{change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature'])}", 
+                      :controller => "weather", 
+                      :action => "localized_weather", 
+                      :city => @retrieved_data.elements["yweather:location"].attributes['city'],
+                      :units => change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature']))%>
+    </p>
+</div>
+</div>
 <div class="row">
   <div class="large-12 columns panel">
       <h3>Current weather conditions</h3>
@@ -72,7 +80,7 @@
         <tr>
           <td><%= element.attributes["day"] %>, <%= element.attributes["date"] %></td>
           <td><%= element.attributes["low"] %>°C</td>
-          <td><%= element.attributes["high"] %>°C</td>
+          <td><%= element.attributes["high"] %>°<%=@retrieved_data.elements["yweather:units"].attributes['temperature']%></td>
           <td><%= element.attributes["text"] %></td>
           <td><%= image_tag("weather_icons/#{element.attributes['code']}.png",
                       alt: element.attributes['text'],

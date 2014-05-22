@@ -22,7 +22,7 @@
           <% ConnectToApi::LOCATION_CODES.keys.each do |key| %>
             <li><%= link_to(key, 
                       :controller => "weather", 
-                      :action => "localized_weather", 
+                      :action => "show", 
                       :city => key, 
                       :units => display_correct_unit )%></li>
           <% end %>

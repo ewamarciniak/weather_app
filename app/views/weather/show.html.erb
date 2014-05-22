@@ -7,7 +7,7 @@
  <div class="large-1 columns">
     <p class="button tiny round" id="unit_button"><%= link_to("°#{change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature'])}", 
                       :controller => "weather", 
-                      :action => "localized_weather", 
+                      :action => "show", 
                       :city => @retrieved_data.elements["yweather:location"].attributes['city'],
                       :units => change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature']).downcase)%>
     </p>

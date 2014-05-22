@@ -14,7 +14,7 @@ class ConnectToApi
   def pull_weather_info(city, units)
 
     # using Yahoo API
-    unit_parameter = (units =='C' || units =="" ) ? '&u=c' : ''
+    unit_parameter = (units =='c' || units =="" ) ? '&u=c' : ''
     url = 'http://weather.yahooapis.com/forecastrss?w=' + LOCATION_CODES[city] + unit_parameter
 
     # getting the XML data as a string

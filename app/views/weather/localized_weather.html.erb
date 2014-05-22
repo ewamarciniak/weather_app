@@ -9,7 +9,7 @@
                       :controller => "weather", 
                       :action => "localized_weather", 
                       :city => @retrieved_data.elements["yweather:location"].attributes['city'],
-                      :units => change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature']))%>
+                      :units => change_unit(@retrieved_data.elements["yweather:units"].attributes['temperature']).downcase)%>
     </p>
 </div>
 </div>

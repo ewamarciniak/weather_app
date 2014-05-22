@@ -1,4 +1,5 @@
 module WeatherHelper
+
   def wind_direction(wind_direction)
 
     direction = wind_direction.blank? ? "" : wind_direction.to_f
@@ -49,5 +50,9 @@ module WeatherHelper
 
   def change_unit(current_unit)
     current_unit == 'C' ? 'F' : 'C'
+  end
+
+  def display_correct_unit
+    @retrieved_data ? @retrieved_data.elements["yweather:units"].attributes['temperature'].downcase : 'c'
   end
 end

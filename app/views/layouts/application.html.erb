@@ -24,7 +24,7 @@
                       :controller => "weather", 
                       :action => "localized_weather", 
                       :city => key, 
-                      :units => @retrieved_data ? @retrieved_data.elements["yweather:units"].attributes['temperature'] : '')%></li>
+                      :units => display_correct_unit )%></li>
           <% end %>
         </ul>
       </section>

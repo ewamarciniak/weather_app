@@ -104,4 +104,28 @@ class WeatherHelperTest < ActionView::TestCase
   test "check if the average_temperature function returns an precise average value" do
     assert_equal 17.85, average_temperature(10.5, 25.2)
   end
+
+  test "check if a correct Farenheit link is displayed on the unit changing button when current unit is Celsius" do
+    assert_equal 'F', change_unit('C')
+  end
+
+  test "check if a correct Celsius link is displayed on the unit changing button when current unit is Farenheit" do
+    assert_equal 'C', change_unit('F')
+  end
+
+  test "check if unit parameter is set to Celsius in the main menu link when the API request is not made yet" do
+    assert_equal 'c', display_correct_unit
+  end
+
+  test "check if unit parameter is set to Celsius in the main menu link when previous request result displayed in Celsius" do
+    api_connection = ConnectToApi.new
+    @retrieved_data = api_connection.pull_weather_info('Dublin', 'c')
+    assert_equal 'c', display_correct_unit
+  end
+
+  test "check if unit parameter is set to Farenheit in the main menu link when previous request result displayed in Farenheit" do
+    api_connection = ConnectToApi.new
+    @retrieved_data = api_connection.pull_weather_info('Dublin', 'f')
+    assert_equal 'f', display_correct_unit
+  end
 end
